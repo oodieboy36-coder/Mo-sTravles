@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mo'Travels | Premium Transport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #111; --accent: #e67e22; --whatsapp: #25D366; --bg: #f8f9fa; --radius: 12px; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: #333; line-height: 1.6; }
+        
+        /* Navigation */
+        .nav-container { position: fixed; top: 0; left: 0; z-index: 1001; padding: 15px; }
+        .menu-btn { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .nav-menu { display: none; position: absolute; top: 55px; left: 15px; background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 180px; overflow: hidden; }
+        .nav-menu button { width: 100%; text-align: left; padding: 15px; background: none; border: none; border-bottom: 1px solid #eee; font-size: 16px; cursor: pointer; font-family: 'Inter'; }
+
+        /* Header */
+        header { background: #fff; text-align: center; border-bottom: 4px solid var(--accent); }
+        .logo-banner { width: 100%; height: auto; max-height: 250px; object-fit: contain; display: block; }
+
+        .container { max-width: 900px; margin: 10px auto; padding: 15px; width: 92%; box-sizing: border-box; }
+        
+        .whatsapp-btn { display: block; text-align: center; background: var(--whatsapp); color: white; padding: 18px; border-radius: var(--radius); text-decoration: none; font-weight: 800; margin-bottom: 25px; width: 100%; border: none; font-size: 16px; cursor: pointer; }
+
+        /* Pricing Section */
+        .price-section { background: white; padding: 20px; border-radius: var(--radius); margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .price-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        .price-table td { padding: 10px; border-bottom: 1px solid #eee; }
+        .route-category { background: var(--primary); color: white; padding: 8px 10px; margin-top: 15px; font-weight: bold; border-radius: 4px; font-size: 0.85rem; }
+
+        /* Services Section */
+        .services-section { margin-bottom: 30px; }
+        .service-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; text-align: center; }
+        .service-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .service-info { padding: 20px; border-left: 5px solid var(--accent); text-align: left; }
+
+        /* Booking Section */
+        .booking-section { background: #111; color: white; padding: 25px; border-radius: var(--radius); }
+        input, select, textarea { padding: 14px; border-radius: 8px; border: none; font-size: 16px; width: 100%; box-sizing: border-box; margin-bottom: 10px; font-family: 'Inter'; }
+        .book-btn { background: var(--accent); color: white; border: none; font-weight: 800; padding: 18px; border-radius: 8px; font-size: 1.1rem; width: 100%; cursor: pointer; }
+
+        .ticket-box { display: none; text-align: center; border: 3px dashed var(--whatsapp); padding: 20px; border-radius: var(--radius); background: #fff; color: #333; margin-top: 20px; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-content { background: white; width: 90%; max-width: 600px; max-height: 85vh; border-radius: var(--radius); padding: 25px; display: flex; flex-direction: column; }
+        .modal-body { overflow-y: auto; font-size: 0.95rem; margin-bottom: 20px; }
+        .close-modal-btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        footer { background: var(--primary); color: white; text-align: center; padding: 25px; font-size: 0.8rem; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<nav class="nav-container">
+    <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
+    <div id="navMenu" class="nav-menu">
+        <button onclick="openModal('aboutModal')">About Us</button>
+        <button onclick="scrollToSection('services')">Our Services</button>
+        <button onclick="scrollToSection('pricing')">Price List</button>
+        <button onclick="scrollToSection('booking')">Book a Trip</button>
+    </div>
+</nav>
+
+<header>
+    <img src="images/logo.jpg" alt="Mo'Travels Logo" class="logo-banner">
+</header>
+
+<div class="container">
+    <button class="whatsapp-btn" onclick="handleWhatsApp()">
+        Message us on WhatsApp
+    </button>
+
+    <section id="services" class="services-section">
+        <h2 style="text-align:center;">Our Services</h2>
+        <div class="service-card">
+            <img src="images/friends-trip.jpg" alt="Passenger Travel">
+            <div class="service-info">
+                <h3>🚗 Passenger Trips</h3>
+                <p>Reliable door-to-door travel. We connect you from your home directly to your destination without unnecessary inconvenience.</p>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="images/generic-delivery.png" alt="Parcel Service">
+            <div class="service-info">
+                <h3>📦 Parcel Delivery</h3>
+                <p>Secure long-distance delivery for your goods and packages, operating on a daily basis.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="price-section">
+        <h2 style="text-align:center; color:var(--primary);">Travel Price List</h2>
+        
+        <div class="route-category">Mthatha Region</div>
+        <table class="price-table">
+            <tr><td>Mthatha</td><td>R500</td></tr>
+            <tr><td>Dutywa</td><td>R450</td></tr>
+            <tr><td>Butterworth</td><td>R400</td></tr>
+        </table>
+
+        <div class="route-category">East London Region</div>
+        <table class="price-table">
+            <tr><td>East London</td><td>R350</td></tr>
+            <tr><td>King William’s Town</td><td>R300</td></tr>
+        </table>
+
+        <div class="route-category">Coastal & Local</div>
+        <table class="price-table">
+            <tr><td>Makhanda</td><td>R200</td></tr>
+            <tr><td>Port Alfred</td><td>R200</td></tr>
+        </table>
+
+        <div class="route-category" style="background: var(--accent);">Custom & Long Distance</div>
+        <table class="price-table">
+            <tr><td>Cape Town / Johannesburg</td><td><strong>Request Quote</strong></td></tr>
+            <tr><td>Private Door-to-Door</td><td><strong>Request Quote</strong></td></tr>
+        </table>
+    </section>
+
+    <section id="booking" class="booking-section">
+        <h2 style="text-align:center; margin-top:0; color: var(--accent);">Secure Your Booking</h2>
+        <form id="bookingForm">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" placeholder="Surname" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <textarea id="address" placeholder="Pickup Address" rows="2" required></textarea>
+            <input type="datetime-local" id="pickupTime" required>
+            <select id="destination" required>
+                <option value="" disabled selected>Select Destination</option>
+                <option value="Mthatha">Mthatha</option>
+                <option value="East London">East London</option>
+                <option value="Makhanda">Makhanda</option>
+                <option value="Other">Other (Custom Route)</option>
+            </select>
+            <button type="button" class="book-btn" onclick="generateTicket()">Confirm Booking</button>
+        </form>
+
+        <div id="ticketBox" class="ticket-box">
+            <h2 style="color: var(--whatsapp);">Booking Confirmed!</h2>
+            <div id="ticketData" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 8px;"></div>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Please take a screenshot of this ticket and send it to our WhatsApp to finalize your seat.</p>
+        </div>
+    </section>
+</div>
+
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-top:0; color:var(--accent);">About Us</h2>
+        <div class="modal-body">
+            <p><strong>Mo’Travels Pty, Ltd</strong></p>
+            <p>Mo’Travels Pty, Ltd is a transport company established in 2026 with the vision of providing reliable, comfortable, and efficient travel services to passengers who require long-distance transportation. The company was founded with the understanding that many travellers need dependable transport that connects them from their homes directly to their destinations without unnecessary inconvenience.</p>
+            <p>Mo’Travels Pty, Ltd specialises in long-distance, door-to-door travel services, operating on a daily basis to ensure that customers have access to consistent and convenient transport whenever they need it. By focusing on this niche, the company aims to remove the stress often associated with long journeys by offering a service that is both professional and customer-focused.</p>
+            <p>Our mission is to provide the best travel experience to our customers by prioritising safety, comfort, reliability, and punctuality in every trip we undertake. We believe that transportation should not only move people from one location to another but also create a pleasant and dependable travel experience.</p>
+            <p>As a growing transport business, Mo’Travels Pty, Ltd places strong emphasis on customer satisfaction, well-maintained vehicles, and professional drivers who understand the importance of courteous service and responsible driving.</p>
+            <p>In the transport industry, reliability and reputation are key to long-term success. For this reason, Mo’Travels Pty, Ltd aims to continuously improve its services by maintaining strict safety standards, ensuring vehicles are comfortable for extended journeys, and providing flexible travel options that meet the needs of diverse customers.</p>
+            <p><strong>Mo’Travels, Your Journey, Our Priority.</strong></p>
+        </div>
+        <button class="close-modal-btn" onclick="closeModal('aboutModal')">Close</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Mo'Travels Pty, Ltd | Gqeberha</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; toggleMenu(); }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function scrollToSection(id) { 
+        document.getElementById(id).scrollIntoView({behavior: 'smooth'}); 
+        const menu = document.getElementById('navMenu');
+        if(menu.style.display === 'block') toggleMenu(); 
+    }
+    
+    // Direct WhatsApp function
+    function handleWhatsApp() {
+        const msg = "Hello MoTravels, I would like to enquire about a booking.";
+        const url = "https://wa.me/27813238815?text=" + encodeURIComponent(msg);
+        window.location.href = url;
+    }
+
+    function generateTicket() {
+        const form = document.getElementById('bookingForm');
+        if(!form.checkValidity()) { alert("Please fill in all details."); return; }
+        const name = document.getElementById('firstName').value + " " + document.getElementById('lastName').value;
+        const dest = document.getElementById('destination').value;
+        const id = "MOT-" + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('ticketData').innerHTML = `<p><strong>ID:</strong> ${id}</p><p><strong>Passenger:</strong> ${name}</p><p><strong>Destination:</strong> ${dest}</p>`;
+        form.style.display = 'none';
+        document.getElementById('ticketBox').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
